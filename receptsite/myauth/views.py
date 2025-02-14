@@ -1,11 +1,23 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LogoutView
 from django.http import HttpRequest
 from django.shortcuts import render,redirect
 from django.urls import reverse, reverse_lazy
+from django.views.generic import TemplateView, CreateView
 
 
 # Create your views here.
+class AboutMeView(TemplateView):
+    template_name = "myauth/about-me.html"
+class RegisterView(CreateView):
+    form_class = UserCreationForm
+    template_name = "myauth/register.html"
+    success_url = reverse_lazy("myauth:about_me")
+#     log:sam
+#     pas:zzxxccvv11Z
+
+
 def login_view(request: HttpRequest):
     if request.method == "GET":
         if request.user.is_authenticated:

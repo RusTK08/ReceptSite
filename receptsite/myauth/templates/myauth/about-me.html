@@ -1,0 +1,18 @@
+{% extends 'myauth/base.html' %}
+
+{% block title %}
+    Обо мне
+{% endblock %}
+
+{% block body %}
+<h1>Информация о пользователе</h1>
+    {% if user.is_authenticated %}
+      <h2>Детали</h2>
+      <p>Имя {{ user.username }}</p>
+      <p>Фамилия{{ user.first_name }}</p>
+      <p>Отчество{{ user.last_name }}</p>
+      <p>Почта{{ user.email }}</p>
+    {% else %}
+      <h2>Анонимный пользователь</h2>
+    {% endif %}
+{% endblock %}
