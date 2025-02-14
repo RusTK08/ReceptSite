@@ -5,14 +5,16 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Создать новый рецепт для пользователя:</h1>
-    <div>
-      <form method="post">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button type="submit">
-              Create
-          </button>
-      </form>
-    </div>
+<!--    {% if request.user.is_authenticated %}-->
+        <h1>Создать новый рецепт для пользователя:</h1>
+        <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">
+                Create
+            </button>
+        </form>
+        </div>
+<!--    {% endif %}-->
 {% endblock %}

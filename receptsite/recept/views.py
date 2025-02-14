@@ -1,15 +1,19 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import Group
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import UpdateView, DeleteView
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from recept.forms import ReceptForm
 from recept.models import Recept
 
 
+
 # Create your views here.
+
 def recept_index(request: HttpRequest) -> HttpResponse:
     return render(request,'recept/recept-index.html')
 def groups_list(request: HttpRequest) -> HttpResponse:
@@ -17,11 +21,13 @@ def groups_list(request: HttpRequest) -> HttpResponse:
         "groups": Group.objects.all(),
     }
     return render(request, 'recept/groups-list.html', context=context)
+
 def recept_list(request: HttpRequest) -> HttpResponse:
     context = {
     "recepts": Recept.objects.all(),
     }
     return render(request, 'recept/recept-list.html', context=context)
+@login_required
 def create_recept_user(request: HttpRequest) -> HttpResponse:
     if request.method == "POST":
         form = ReceptForm(request.POST)
@@ -36,14 +42,14 @@ def create_recept_user(request: HttpRequest) -> HttpResponse:
             "form": form,
         }
     return render(request, "recept/create-user-recept.html", context=context)
-class ReceptDetailsView(View):
+class ReceptDetailsView(LoginRequiredMixin, View):
     def get(self, request: HttpRequest, pk:int):
         receptfind = Recept.objects.get(pk=pk)
         context = {
             "receptfind": receptfind,
         }
         return render(request,'recept/recept-details.html', context=context)
-class ReceptUpdateView(UpdateView):
+class ReceptUpdateView(LoginRequiredMixin, UpdateView):
     model = Recept
     fields = "name", "count_ingredients", "ingredients", "weight_ingredients_gramm", "author"
     template_name_suffix = "-update-form"
@@ -54,6 +60,6 @@ class ReceptUpdateView(UpdateView):
                 "pk": self.object.pk
                     },
         )
-class ReceptDeleteView(DeleteView):
+class ReceptDeleteView(LoginRequiredMixin, DeleteView):
     model = Recept
     success_url = reverse_lazy("recept:recept_list")

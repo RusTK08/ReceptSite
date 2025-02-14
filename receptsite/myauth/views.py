@@ -1,5 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.views import LogoutView
 from django.http import HttpRequest
 from django.shortcuts import render,redirect
@@ -16,6 +17,13 @@ class RegisterView(CreateView):
     success_url = reverse_lazy("myauth:about_me")
 #     log:sam
 #     pas:zzxxccvv11Z
+
+    # user = User.objects.exclude(pk=1)
+    # group, created = Group.objects.get_or_create(name='user_group')
+    # user.groups.add(group)
+    # user.save()
+    # group.save()
+
 
 
 def login_view(request: HttpRequest):
