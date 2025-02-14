@@ -10,11 +10,11 @@
         <div>
             {% for recept in recepts %}
                 <div>
-                    <p>Название: {{ recept.name }} </p>
+                    <p><a href="{% url 'recept:recept_details' pk=recept.pk %}">Название: {{ recept.name }}</a></p>
                     <p>Количество ингридиентов: {{ recept.count_ingredients }} </p>
                     <p>Ингридиенты: {{ recept.ingredients }} </p>
                     <p>Вес ингридиентов: {{ recept.weight_ingredients_gramm }} </p>
-                    <p><img src="../img/product-showcase-background_597316-255.avif" alt="image" width="360"></p>
+<!--                    <p><img src="../img/product-showcase-background_597316-255.avif" alt="image" width="360"></p>-->
                 </div>
             {% endfor %}
         </div>

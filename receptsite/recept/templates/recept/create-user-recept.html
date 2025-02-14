@@ -1,0 +1,18 @@
+{% extends 'recept/base.html' %}
+
+{% block title %}
+    Создать рецепт для пользователя
+{% endblock %}
+
+{% block body %}
+    <h1>Создать новый рецепт для пользователя:</h1>
+    <div>
+      <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit">
+              Create
+          </button>
+      </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'recept/base.html' %}
+
+{% block title %}
+    Удаление
+{% endblock %}
+
+{% block body %}
+    <h1>Вы уверены что хотите удалить?{{ object.name }}:</h1>
+    <br>
+    <div><a href="{% url 'recept:recept_details' pk=object.pk %}">Назад к рецепту</a> #or percept.pk
+    </div>
+    <br>
+    <div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Удалить</button>
+        </form>
+    </div>
+{% endblock %}
