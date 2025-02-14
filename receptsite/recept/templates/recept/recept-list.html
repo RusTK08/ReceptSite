@@ -1,0 +1,24 @@
+{% extends 'recept/base.html' %}
+
+{% block title %}
+    Recept List
+{% endblock %}
+
+{% block body %}
+    <h1>Рецепты:</h1>
+    {% if recepts %}
+        <div>
+            {% for recept in recepts %}
+                <div>
+                    <p>Название: {{ recept.name }} </p>
+                    <p>Количество ингридиентов: {{ recept.count_ingredients }} </p>
+                    <p>Ингридиенты: {{ recept.ingredients }} </p>
+                    <p>Вес ингридиентов: {{ recept.weight_ingredients_gramm }} </p>
+                    <p><img src="../img/product-showcase-background_597316-255.avif" alt="image" width="360"></p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+    <h3>Нет рецептов</h3>
+    {% endif %}
+{% endblock %}
