@@ -1,6 +1,9 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LogoutView
 from django.http import HttpRequest
 from django.shortcuts import render,redirect
+from django.urls import reverse, reverse_lazy
+
 
 # Create your views here.
 def login_view(request: HttpRequest):
@@ -15,3 +18,8 @@ def login_view(request: HttpRequest):
         login(request, user)
         return redirect("/admin/")
     return render(request, "myauth/login.html", {"error":"Ошибка авторизации"})
+def logout_view(request: HttpRequest):
+    logout(request)
+    return redirect(reverse("myauth:login"))
+class MyLogoutView(LogoutView):
+    next_page = reverse_lazy("myauth:login")
