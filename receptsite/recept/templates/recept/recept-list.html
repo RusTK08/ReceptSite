@@ -15,6 +15,9 @@
                     <p>Ингридиенты: {{ recept.ingredients }} </p>
                     <p>Вес ингридиентов: {{ recept.weight_ingredients_gramm }} </p>
 <!--                    <p><img src="../img/product-showcase-background_597316-255.avif" alt="image" width="360"></p>-->
+                {% if recept.preview %} 
+                    <img src="{{ recept.preview.url }}" alt="{{ recept.preview.name }}">
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>

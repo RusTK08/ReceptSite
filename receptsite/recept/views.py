@@ -38,7 +38,7 @@ def create_recept_user(request: HttpRequest) -> HttpResponse:
 
     else:
         form = ReceptForm() # or this block Recept.objects.create(**form.cleaned_data)
-        context = {
+    context = {
             "form": form,
         }
     return render(request, "recept/create-user-recept.html", context=context)
@@ -51,7 +51,7 @@ class ReceptDetailsView(LoginRequiredMixin, View):
         return render(request,'recept/recept-details.html', context=context)
 class ReceptUpdateView(LoginRequiredMixin, UpdateView):
     model = Recept
-    fields = "name", "count_ingredients", "ingredients", "weight_ingredients_gramm", "author"
+    fields = "name", "count_ingredients", "ingredients", "weight_ingredients_gramm", "author", "preview"
     template_name_suffix = "-update-form"
     def get_success_url(self):
         return reverse(

@@ -8,7 +8,7 @@
 <!--    {% if request.user.is_authenticated %}-->
         <h1>Создать новый рецепт для пользователя:</h1>
         <div>
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">

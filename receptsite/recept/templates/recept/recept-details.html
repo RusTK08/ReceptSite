@@ -11,6 +11,10 @@
         <div>Количество ингридиентов: {{ recept.count_ingredients }} </div>
         <div>Ингридиенты: {{ recept.ingredients }} </div>
         <div>Вес ингридиентов: {{ recept.weight_ingredients_gramm }} </div>
+        <div>Автор: {{ recept.author }}</div>
+        {% if recept.preview %}
+            <img src="{{ recept.preview.url }}" alt="{{ recept.preview.name }}">
+        {% endif %}
     </div>
     <div><a href="{% url 'recept:recept_update' pk=recept.pk %}">Обновить рецепт</a></div>
     <div><a href="{% url 'recept:recept_delete' pk=recept.pk %}">Удалить рецепт</a></div>
